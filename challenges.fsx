@@ -76,9 +76,6 @@ let only_ints (ints:list<'T> ): bool =
     
 // Challenge #6
 
-// "banana"
-
-// analyse if two same letter in row.
 let double_letters (word:string) : bool =
     let charList = word.ToCharArray() |> List.ofArray
     charList 
@@ -94,5 +91,39 @@ let double_letters (word:string) : bool =
 // > double_letters "aabc";;
 // val it: bool = true
 
+
+// Challenge #7
+
+let withDot (word:string) =
+    seq { for i in word.ToCharArray() do i.ToString()}
+    |> String.concat "." 
+
+let withoutDot (word:string) =
+    seq { for i in word.ToCharArray() do if i.ToString() = "." then i.ToString()}
+    |> String.concat "" 
+
+// Challenge #8
+
+// You function should return the number of syllales
+// "ho-tel" 2
+let count (word:string) = 
+    let charList = word.ToCharArray() |> List.ofArray
+    charList
+    |> List.mapi (fun i x -> if x.ToString() = "-" then i else -1)  
+    |> List.filter (fun x -> x <> -1)  
+
+// Challenge #9
+
+let is_anagram (word1:string) (word2:string)  =
+    
+    let comp a b =
+        (a.ToString()).CompareTo(b.ToString())
+
+    let charList = word1.ToCharArray() |> List.ofArray
+    let reversedCharList = charList |> List.rev
+    
+    let charList2 = word2.ToCharArray() |> List.ofArray
+
+    (charList, charList2) ||> List.compareWith comp
 
 
